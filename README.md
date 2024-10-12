@@ -1,0 +1,1 @@
+This project connects the androidapp to an MySQLi database
