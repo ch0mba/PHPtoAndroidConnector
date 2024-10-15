@@ -28,18 +28,23 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Verify the password using password hashing (e.g., bcrypt)
         if (password_verify($password, $user['password'])) {
-            echo json_encode(["status" => "success", "message" => "Login successful"]);
+            //success message
+            $response(["status" => "success", "message" => "Login successful"]);
         } else {
-            echo json_encode(["status" => "error", "message" => "Invalid password"]);
+            $response(["status" => "error", "message" => "Invalid password"]);
         }
     } else {
-        echo json_encode(["status" => "error", "message" => "User not found"]);
+        $response(["status" => "error", "message" => "User not found"]);
     }
 
-    // Close the statement and connection
-    $stmt->close();
-    $conn->close();
-} else {
-    echo json_encode(["status" => "error", "message" => "Invalid request method. Please use POST."]);
-}
+        // Close the statement and connection
+        $stmt->close();
+    
+    } else {
+        $response(["status" => "error", "message" => "Invalid request method.Please use POST."]);
+    }
+
+// Return response as JSON
+echo json_encode($response);
+$conn->close();
 ?>
